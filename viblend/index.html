@@ -65,7 +65,15 @@
   </div>
 
   <!-- Runtime config injection point (server can set window.__VIBLEND_CONFIG here) -->
-  <script>window.__VIBLEND_CONFIG = {};</script>
+  <script>
+window.__VIBLEND_CONFIG = {
+  SUPABASE_URL: 'https://s1hreshthjain-hue.supabase.co',
+  SUPABASE_ANON_KEY: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imhtb2V4a3F6YnZxcXhrdnNvd3hvIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODIwNDg5NjAsImV4cCI6MjA5NzYyNDk2MH0.YfF80Ex9dLTKrrNM7HE5TZubYTVechgY6UwAXia-fZc',
+  SPOTIFY_CLIENT_ID: '20a3c971b86e4fc095b97800a9d4d298',
+  SPOTIFY_REDIRECT_URI: 'https://viblend-iota.vercel.app',
+  APP_URL: 'https://viblend-iota.vercel.app',
+};
+</script>
 
   <!-- Supabase CDN -->
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
