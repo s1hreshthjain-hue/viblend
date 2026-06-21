@@ -1,0 +1,46 @@
+{
+  "name": "Viblend",
+  "short_name": "Viblend",
+  "description": "Social music and karaoke for your party. Every song, for everyone in the room.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "background_color": "#0F0E1A",
+  "theme_color": "#5B4DDE",
+  "lang": "en",
+  "categories": ["music", "entertainment", "social"],
+  "icons": [
+    {
+      "src": "/icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Create Party",
+      "short_name": "Create",
+      "description": "Start a new music party",
+      "url": "/?action=create",
+      "icons": [{ "src": "/icons/icon-192.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "Join Party",
+      "short_name": "Join",
+      "description": "Join an existing party with a code",
+      "url": "/?action=join",
+      "icons": [{ "src": "/icons/icon-192.png", "sizes": "192x192" }]
+    }
+  ],
+  "screenshots": [],
+  "related_applications": [],
+  "prefer_related_applications": false
+}

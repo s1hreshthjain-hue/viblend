@@ -1,0 +1,263 @@
+/* css/animations.css — All Viblend keyframe animations */
+
+/* ─── Core Animations ────────────────────────────────────────────────────────── */
+
+@keyframes fade-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes fade-out {
+  from { opacity: 1; }
+  to   { opacity: 0; }
+}
+
+@keyframes scale-in {
+  from { transform: scale(0.95); opacity: 0; }
+  to   { transform: scale(1);    opacity: 1; }
+}
+
+@keyframes scale-out {
+  from { transform: scale(1);    opacity: 1; }
+  to   { transform: scale(0.95); opacity: 0; }
+}
+
+@keyframes slide-up {
+  from { transform: translateY(100%); }
+  to   { transform: translateY(0); }
+}
+
+@keyframes slide-down {
+  from { transform: translateY(-20px); opacity: 0; }
+  to   { transform: translateY(0);     opacity: 1; }
+}
+
+@keyframes slide-in-right {
+  from { transform: translateX(100%); opacity: 0; }
+  to   { transform: translateX(0);    opacity: 1; }
+}
+
+@keyframes slide-in-left {
+  from { transform: translateX(-100%); opacity: 0; }
+  to   { transform: translateX(0);     opacity: 1; }
+}
+
+/* ─── Mic / Audio ────────────────────────────────────────────────────────────── */
+
+@keyframes pulse-mic {
+  0%   { transform: scale(1);    opacity: 1; }
+  50%  { transform: scale(1.12); opacity: 0.8; }
+  100% { transform: scale(1);    opacity: 1; }
+}
+
+@keyframes pulse-mic-fab {
+  0%   { box-shadow: 0 0 0 0 rgba(226, 75, 74, 0.5); }
+  70%  { box-shadow: 0 0 0 16px rgba(226, 75, 74, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(226, 75, 74, 0); }
+}
+
+@keyframes mic-ripple {
+  0%   { transform: scale(0.9); opacity: 0.8; }
+  100% { transform: scale(1.5); opacity: 0; }
+}
+
+/* ─── Glow Effects ───────────────────────────────────────────────────────────── */
+
+@keyframes glow-pulse {
+  from { box-shadow: 0 0 20px rgba(91, 77, 222, 0.2); }
+  to   { box-shadow: 0 0 40px rgba(91, 77, 222, 0.5), 0 0 80px rgba(91, 77, 222, 0.15); }
+}
+
+@keyframes glow-pulse-red {
+  from { box-shadow: 0 0 20px rgba(226, 75, 74, 0.2); }
+  to   { box-shadow: 0 0 40px rgba(226, 75, 74, 0.5); }
+}
+
+@keyframes glow-pulse-green {
+  from { box-shadow: 0 0 16px rgba(29, 185, 84, 0.2); }
+  to   { box-shadow: 0 0 32px rgba(29, 185, 84, 0.45); }
+}
+
+/* ─── Album Art ──────────────────────────────────────────────────────────────── */
+
+@keyframes album-spin {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+@keyframes album-pulse {
+  0%   { box-shadow: 0 20px 60px rgba(0,0,0,0.6); }
+  50%  { box-shadow: 0 24px 80px rgba(0,0,0,0.8), 0 0 60px var(--album-glow, rgba(91,77,222,0.3)); }
+  100% { box-shadow: 0 20px 60px rgba(0,0,0,0.6); }
+}
+
+/* ─── Lyric Highlight ───────────────────────────────────────────────────────── */
+
+@keyframes lyric-activate {
+  0%   { transform: scale(1);    color: var(--text-tertiary); }
+  60%  { transform: scale(1.08); }
+  100% { transform: scale(1.05); color: var(--text-primary); }
+}
+
+/* ─── VU Level Bars ──────────────────────────────────────────────────────────── */
+
+@keyframes level-bar-1 {
+  0%, 100% { height: 4px; }
+  50%       { height: 12px; }
+}
+
+@keyframes level-bar-2 {
+  0%, 100% { height: 8px; }
+  30%       { height: 18px; }
+  70%       { height: 6px; }
+}
+
+@keyframes level-bar-3 {
+  0%, 100% { height: 16px; }
+  40%       { height: 20px; }
+  60%       { height: 10px; }
+}
+
+@keyframes level-bar-4 {
+  0%, 100% { height: 6px; }
+  50%       { height: 14px; }
+}
+
+@keyframes level-bar-5 {
+  0%, 100% { height: 4px; }
+  35%       { height: 10px; }
+  65%       { height: 16px; }
+}
+
+/* ─── Spinner ────────────────────────────────────────────────────────────────── */
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+@keyframes spin-slow {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+  animation-timing-function: linear;
+  animation-duration: 3s;
+}
+
+/* ─── Confetti ───────────────────────────────────────────────────────────────── */
+
+@keyframes confetti-fall {
+  0%   { transform: translateY(-10vh) rotate(0deg);   opacity: 1; }
+  80%  { opacity: 1; }
+  100% { transform: translateY(110vh) rotate(720deg); opacity: 0; }
+}
+
+@keyframes confetti-sway {
+  0%   { margin-left: 0; }
+  25%  { margin-left: 30px; }
+  75%  { margin-left: -30px; }
+  100% { margin-left: 0; }
+}
+
+/* ─── Vibe Change Flash ──────────────────────────────────────────────────────── */
+
+@keyframes vibe-flash {
+  0%   { background: rgba(91, 77, 222, 0); }
+  30%  { background: rgba(91, 77, 222, 0.15); }
+  100% { background: rgba(91, 77, 222, 0); }
+}
+
+/* ─── Member Join ────────────────────────────────────────────────────────────── */
+
+@keyframes member-join {
+  0%   { transform: scale(0.7) translateY(10px); opacity: 0; }
+  70%  { transform: scale(1.05) translateY(-2px); }
+  100% { transform: scale(1) translateY(0);       opacity: 1; }
+}
+
+@keyframes member-leave {
+  0%   { transform: scale(1);   opacity: 1; }
+  100% { transform: scale(0.7); opacity: 0; }
+}
+
+/* ─── Queue Update Toast ─────────────────────────────────────────────────────── */
+
+@keyframes toast-in {
+  from { transform: translateY(-12px); opacity: 0; }
+  to   { transform: translateY(0);     opacity: 1; }
+}
+
+@keyframes toast-out {
+  from { transform: translateY(0);     opacity: 1; }
+  to   { transform: translateY(-12px); opacity: 0; }
+}
+
+/* ─── Song Transition ────────────────────────────────────────────────────────── */
+
+@keyframes song-change-out {
+  from { transform: translateX(0) scale(1);  opacity: 1; }
+  to   { transform: translateX(-30px) scale(0.95); opacity: 0; }
+}
+
+@keyframes song-change-in {
+  from { transform: translateX(30px) scale(0.95); opacity: 0; }
+  to   { transform: translateX(0) scale(1);       opacity: 1; }
+}
+
+/* ─── Cover Art Color Sweep ──────────────────────────────────────────────────── */
+
+@keyframes color-sweep {
+  from { background-position: 0% 50%; }
+  to   { background-position: 100% 50%; }
+}
+
+/* ─── Heartbeat (for live indicators) ───────────────────────────────────────── */
+
+@keyframes heartbeat {
+  0%   { transform: scale(1); }
+  14%  { transform: scale(1.15); }
+  28%  { transform: scale(1); }
+  42%  { transform: scale(1.1); }
+  70%  { transform: scale(1); }
+  100% { transform: scale(1); }
+}
+
+/* ─── Utility Classes ────────────────────────────────────────────────────────── */
+
+.anim-fade-in     { animation: fade-in 0.2s ease forwards; }
+.anim-scale-in    { animation: scale-in 0.25s cubic-bezier(0.4,0,0.2,1) forwards; }
+.anim-slide-up    { animation: slide-up 0.35s cubic-bezier(0.4,0,0.2,1) forwards; }
+.anim-song-in     { animation: song-change-in 0.3s cubic-bezier(0.4,0,0.2,1) forwards; }
+.anim-member-join { animation: member-join 0.4s cubic-bezier(0.34,1.56,0.64,1) forwards; }
+
+/* Active mic dot pulse on member cards */
+.status-dot.loading { animation: pulse-mic 1.5s ease infinite; }
+
+/* Now Playing album art pulse when playing */
+.album-art.playing { animation: album-pulse 4s ease-in-out infinite; }
+
+/* VU bars default idle animation */
+.vu-bar:nth-child(1) { animation: level-bar-1 1.1s ease-in-out infinite; }
+.vu-bar:nth-child(2) { animation: level-bar-2 0.9s ease-in-out infinite; }
+.vu-bar:nth-child(3) { animation: level-bar-3 1.3s ease-in-out infinite; }
+.vu-bar:nth-child(4) { animation: level-bar-4 0.8s ease-in-out infinite; }
+.vu-bar:nth-child(5) { animation: level-bar-5 1.0s ease-in-out infinite; }
+
+/* Pause VU bars when not active */
+.vu-meter.idle .vu-bar { animation: none; height: 4px; }
+
+/* Queue refresh spin */
+.btn-refresh-queue.spinning { animation: spin 0.6s linear; }
+
+/* Ripple on button tap */
+.ripple {
+  position: absolute;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.15);
+  transform: scale(0);
+  animation: ripple-expand 0.4s linear;
+  pointer-events: none;
+}
+
+@keyframes ripple-expand {
+  to { transform: scale(4); opacity: 0; }
+}

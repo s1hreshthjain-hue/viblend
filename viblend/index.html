@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="theme-color" content="#5B4DDE" />
+  <meta name="description" content="Every song, for everyone in the room. Social music and karaoke for your party." />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-title" content="Viblend" />
+  <meta property="og:title" content="Viblend — Social Party Music" />
+  <meta property="og:description" content="Every song, for everyone in the room." />
+  <meta property="og:type" content="website" />
+  <title>Viblend</title>
+  <link rel="manifest" href="/manifest.json" />
+  <link rel="apple-touch-icon" href="/icons/icon-192.png" />
+  <link rel="stylesheet" href="/css/main.css" />
+  <link rel="stylesheet" href="/css/animations.css" />
+  <link rel="stylesheet" href="/css/components.css" />
+</head>
+<body>
+  <!-- Toast container -->
+  <div id="toast-container" class="toast-container"></div>
+
+  <!-- Landing Screen -->
+  <div id="screen-landing" class="screen active" style="justify-content:center;align-items:center;background:var(--bg-base);">
+    <div class="landing-content">
+      <!-- Logo -->
+      <div class="logo-lockup" aria-label="Viblend">
+        <span class="logo-vibl">Vibl</span><span class="logo-end">end</span>
+        <span class="logo-dot" aria-hidden="true"></span>
+      </div>
+
+      <p class="landing-tagline">Every song, for everyone in the room.</p>
+
+      <!-- Platform connect buttons -->
+      <div class="platform-buttons" role="group" aria-label="Connect your music">
+        <button class="btn-platform btn-spotify" id="btn-spotify" aria-label="Connect Spotify">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z"/>
+          </svg>
+          Continue with Spotify
+        </button>
+
+        <button class="btn-platform btn-apple" id="btn-apple" aria-label="Connect Apple Music">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M23.997 6.124a.89.89 0 00-.054-.277A5.9 5.9 0 0019.074 2.2a6.7 6.7 0 00-4.879 2.182A6.81 6.81 0 009.26 2.2a5.871 5.871 0 00-4.868 3.647 5.88 5.88 0 00-.289 2.077C4.103 12.76 8.3 17.362 12 21.8c3.7-4.438 7.896-9.04 7.896-13.876a6.03 6.03 0 00-.1-1.045l.201-.755z"/>
+          </svg>
+          Continue with Apple Music
+        </button>
+
+        <button class="btn-platform btn-youtube" id="btn-youtube" aria-label="Connect YouTube Music">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M23.495 6.205a3.007 3.007 0 00-2.088-2.088c-1.87-.501-9.396-.501-9.396-.501s-7.507-.01-9.396.501A3.007 3.007 0 00.527 6.205a31.247 31.247 0 00-.522 5.805 31.247 31.247 0 00.522 5.783 3.007 3.007 0 002.088 2.088c1.868.502 9.396.502 9.396.502s7.506 0 9.396-.502a3.007 3.007 0 002.088-2.088 31.247 31.247 0 00.5-5.783 31.247 31.247 0 00-.5-5.805zM9.609 15.601V8.408l6.264 3.602z"/>
+          </svg>
+          Continue with YouTube Music
+        </button>
+      </div>
+
+      <p class="landing-privacy">
+        🔒 Your listening history is never stored by Viblend.<br />
+        Data is used only during your session and discarded when you leave.
+      </p>
+    </div>
+  </div>
+
+  <!-- Runtime config injection point (server can set window.__VIBLEND_CONFIG here) -->
+  <script>window.__VIBLEND_CONFIG = {};</script>
+
+  <!-- Supabase CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+  <!-- QRCode -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+
+  <script type="module">
+    import CONFIG from '/js/config.js';
+    import { registerServiceWorker, initInstallPrompt } from '/js/pwa.js';
+    import { initiateSpotifyAuth, initiateAppleAuth, initiateYouTubeAuth, loadSession } from '/js/auth.js';
+    import { showToast } from '/js/ui.js';
+
+    // Register SW
+    registerServiceWorker();
+    initInstallPrompt();
+
+    // If already logged in, redirect to app
+    const session = loadSession();
+    if (session?.accessToken) {
+      window.location.href = '/app';
+    }
+
+    // Handle URL actions
+    const url = new URL(window.location.href);
+    const action = url.searchParams.get('action');
+
+    document.getElementById('btn-spotify').addEventListener('click', async () => {
+      try { await initiateSpotifyAuth(); } // redirects
+      catch (e) { showToast('Connection failed', 'error'); }
+    });
+
+    document.getElementById('btn-apple').addEventListener('click', async () => {
+      try {
+        await initiateAppleAuth();
+        window.location.href = '/app' + (action === 'join' ? '?action=join' : action === 'create' ? '?action=create' : '');
+      } catch (e) {
+        showToast('Apple Music connection failed', 'error');
+      }
+    });
+
+    document.getElementById('btn-youtube').addEventListener('click', async () => {
+      try {
+        await initiateYouTubeAuth();
+        window.location.href = '/app';
+      } catch (e) {
+        showToast('YouTube Music connection failed', 'error');
+      }
+    });
+
+    // If action=join in URL, store pending join
+    if (action === 'join') sessionStorage.setItem('pending_join_prompt', '1');
+  </script>
+</body>
+</html>

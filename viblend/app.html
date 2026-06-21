@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="theme-color" content="#5B4DDE" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-title" content="Viblend" />
+  <title>Viblend</title>
+  <link rel="manifest" href="/manifest.json" />
+  <link rel="apple-touch-icon" href="/icons/icon-192.png" />
+  <link rel="stylesheet" href="/css/main.css" />
+  <link rel="stylesheet" href="/css/animations.css" />
+  <link rel="stylesheet" href="/css/components.css" />
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════════════════════════════════
+     SCREEN 2: HOME
+════════════════════════════════════════════════════════════════════ -->
+<div id="screen-home" class="screen">
+  <div class="top-bar">
+    <div class="avatar-wrap">
+      <div class="avatar" id="home-avatar">?</div>
+      <div class="platform-badge spotify" id="home-platform-badge"></div>
+    </div>
+    <div class="top-bar-logo">Vibl<span>end</span></div>
+    <button class="settings-icon" id="btn-settings" aria-label="Settings">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 012.83-2.83l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 2.83l-.06.06A1.65 1.65 0 0019.4 9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z"/>
+      </svg>
+    </button>
+  </div>
+
+  <div class="home-cards">
+    <div class="home-card home-card-create" id="btn-create-party" role="button" tabindex="0" aria-label="Create a party">
+      <div class="card-icon card-icon-create">🎵</div>
+      <div class="card-title">Create Party</div>
+      <p class="card-desc">Start a room and invite up to 3 friends. You control the vibe.</p>
+    </div>
+
+    <div class="home-card home-card-join" id="btn-join-party" role="button" tabindex="0" aria-label="Join a party">
+      <div class="card-icon card-icon-join">🚪</div>
+      <div class="card-title">Join Party</div>
+      <p class="card-desc">Enter a 6-digit room code to join someone's party.</p>
+      <div class="join-input-wrap" id="join-input-wrap">
+        <input type="text" class="join-input" id="join-code-input"
+               placeholder="Enter code" maxlength="6"
+               autocomplete="off" autocapitalize="characters" spellcheck="false"
+               aria-label="Room code" />
+        <button class="btn-join-go" id="btn-join-go">Join</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="how-it-works">
+    <button class="how-toggle" id="how-toggle" aria-expanded="false">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 8v4M12 16h.01"/></svg>
+      How does Viblend work?
+    </button>
+    <div class="how-steps" id="how-steps" role="list">
+      <div class="how-step" role="listitem">
+        <div class="how-step-num">1</div>
+        <p class="how-step-text"><strong>Connect your music</strong> — Spotify, Apple Music, or YouTube Music. Viblend reads your listening history privately in your browser.</p>
+      </div>
+      <div class="how-step" role="listitem">
+        <div class="how-step-num">2</div>
+        <p class="how-step-text"><strong>Create or join a party</strong> — up to 4 people can join with a 6-digit code. Everyone uses their own music account.</p>
+      </div>
+      <div class="how-step" role="listitem">
+        <div class="how-step-num">3</div>
+        <p class="how-step-text"><strong>Viblend creates the queue</strong> — our AI finds songs everyone in the room knows and loves, based on your chosen vibe.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════════════
+     SCREEN 3: WAITING ROOM
+════════════════════════════════════════════════════════════════════ -->
+<div id="screen-waiting" class="screen">
+  <!-- Room code -->
+  <div class="waiting-code">
+    <div class="waiting-code-label">Room Code</div>
+    <div class="code-display" id="room-code-display" aria-live="polite">------</div>
+    <div class="code-actions">
+      <button class="btn-action-sm" id="btn-copy-code">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
+        Copy Code
+      </button>
+      <a class="btn-action-sm whatsapp" id="btn-whatsapp" target="_blank" rel="noopener">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347"/></svg>
+        WhatsApp
+      </a>
+    </div>
+    <div class="qr-container" id="qr-container" aria-hidden="true"></div>
+  </div>
+
+  <!-- Guest waiting banner (hidden for host) -->
+  <div class="guest-waiting-banner hidden" id="guest-status-banner" aria-live="polite"></div>
+
+  <!-- Ingestion progress (shows during taste load) -->
+  <div class="ingestion-progress" id="ingestion-progress" style="display:none">
+    <div class="ingestion-msg" id="ingestion-msg">Analysing your music taste…</div>
+    <div class="loading-progress">
+      <div class="loading-progress-fill" id="ingestion-fill" style="width:0%"></div>
+    </div>
+  </div>
+
+  <!-- Members list -->
+  <div class="container">
+    <div class="section-label px-20" style="padding:0 0 0 0">In the room</div>
+  </div>
+  <div class="members-list" id="members-list" role="list" aria-live="polite" aria-label="Party members"></div>
+
+  <!-- Vibe selector (host only) -->
+  <div class="vibe-section" id="vibe-section">
+    <div class="section-label">Vibe</div>
+    <div class="vibe-grid" id="vibe-grid" role="group" aria-label="Select vibe"></div>
+  </div>
+
+  <!-- Coverage slider (host only) -->
+  <div class="coverage-section" id="coverage-section">
+    <div class="slider-header">
+      <div class="slider-label">
+        Crowd Coverage
+        <span class="info-icon" title="How many people in the room need to know a song for it to appear in the queue">i</span>
+      </div>
+      <div class="slider-value" id="coverage-value">75%</div>
+    </div>
+    <input type="range" class="viblend-slider w-full" id="coverage-slider"
+           min="0" max="100" value="75" step="5"
+           aria-label="Crowd coverage" />
+    <p class="slider-desc" id="coverage-desc">Songs most of the group knows and loves</p>
+    <div class="coverage-presets">
+      <button class="preset-pill" data-value="25">DJ Flex</button>
+      <button class="preset-pill selected" data-value="75">Party Mix</button>
+      <button class="preset-pill" data-value="100">Universal</button>
+    </div>
+  </div>
+
+  <!-- Vocal Volume (host only) -->
+  <div class="vocal-section" id="vocal-section">
+    <div class="slider-header">
+      <div class="slider-label">
+        Vocal Volume
+        <span class="info-icon" title="Controls how much of the original singing vocals are in the mix. Set to 0 for full instrumental / karaoke mode.">i</span>
+      </div>
+      <span class="vocal-mode-label original" id="vocal-mode-label">Original</span>
+    </div>
+    <input type="range" class="viblend-slider w-full" id="vocal-slider"
+           min="0" max="100" value="100" step="1"
+           aria-label="Vocal volume" />
+  </div>
+
+  <!-- Start party (host only) -->
+  <div class="start-party-section" id="start-party-section">
+    <button class="btn-start-party" id="btn-start-party" disabled aria-label="Start party">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><polygon points="5,3 19,12 5,21"/></svg>
+      Start Party
+    </button>
+    <p style="text-align:center;font-size:12px;color:var(--text-tertiary);margin-top:12px">
+      Waiting for guests to connect…
+    </p>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════════════
+     SCREEN 4: NOW PLAYING
+════════════════════════════════════════════════════════════════════ -->
+<div id="screen-nowplaying" class="screen">
+  <!-- Top bar -->
+  <div class="nowplaying-header">
+    <div class="member-avatars-row" id="member-avatars-row" aria-label="Party members"></div>
+    <div class="room-code-small" id="room-code-small"></div>
+  </div>
+
+  <!-- Album art -->
+  <div class="album-art-wrap">
+    <img class="album-art" id="nowplaying-art" src="" alt="Album art" />
+  </div>
+
+  <!-- Track info -->
+  <div class="track-info">
+    <div class="track-title" id="nowplaying-title">–</div>
+    <div class="track-artist" id="nowplaying-artist">–</div>
+    <div class="coverage-badge" id="coverage-badge">
+      <span>👥</span> Loading…
+    </div>
+  </div>
+
+  <!-- Progress bar -->
+  <div class="progress-section">
+    <div class="progress-bar-wrap" id="progress-bar-wrap" role="slider" aria-label="Playback progress">
+      <div class="progress-bar-fill" id="progress-bar-fill" style="width:0%"></div>
+      <div class="progress-handle" id="progress-handle"></div>
+    </div>
+    <div class="progress-times">
+      <span id="progress-elapsed">0:00</span>
+      <span id="progress-total">0:00</span>
+    </div>
+  </div>
+
+  <!-- Playback controls -->
+  <div class="playback-controls">
+    <button class="ctrl-btn" id="btn-prev" aria-label="Previous track">
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor"><path d="M6 6h2v12H6zm3.5 6 8.5 6V6z"/></svg>
+    </button>
+    <button class="ctrl-btn ctrl-btn-play" id="btn-play-pause" aria-label="Play / Pause">
+      <svg width="26" height="26" viewBox="0 0 24 24" fill="currentColor"><polygon points="5,3 19,12 5,21"/></svg>
+    </button>
+    <button class="ctrl-btn" id="btn-next" aria-label="Next track">
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor"><path d="M6 18l8.5-6L6 6v12zm2-8.14L11.03 12 8 14.14V9.86zM16 6h2v12h-2z"/></svg>
+    </button>
+  </div>
+
+  <!-- Mini vocals slider -->
+  <div class="vocals-mini">
+    <span class="vocals-mini-icon" id="vocals-mini-icon">🎵</span>
+    <input type="range" class="viblend-slider vocals-mini-slider" id="vocals-mini-slider"
+           min="0" max="100" value="100" step="1" aria-label="Vocal volume" />
+    <button class="btn-icon-sm" id="btn-lyrics" aria-label="Show lyrics" title="Lyrics">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14.5 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V7.5L14.5 2z"/><polyline points="14,2 14,8 20,8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10,9 9,9 8,9"/></svg>
+    </button>
+  </div>
+
+  <!-- Queue preview (scrolls with screen) -->
+  <div class="queue-preview">
+    <div class="queue-preview-label">
+      <span>Up Next</span>
+      <button class="btn-icon-sm" id="btn-karaoke" aria-label="Karaoke mode" title="Karaoke">🎤</button>
+    </div>
+    <div id="queue-preview-list"></div>
+  </div>
+
+  <!-- Mic FAB -->
+  <button class="mic-fab" id="mic-fab" aria-label="Toggle microphone">
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+      <path d="M12 14c1.66 0 3-1.34 3-3V5c0-1.66-1.34-3-3-3S9 3.34 9 5v6c0 1.66 1.34 3 3 3zm5.3-3c0 3-2.54 5.1-5.3 5.1S6.7 14 6.7 11H5c0 3.41 2.72 6.23 6 6.72V21h2v-3.28c3.28-.49 6-3.31 6-6.72h-1.7z"/>
+    </svg>
+  </button>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════════════
+     SCREEN 7: QUEUE
+════════════════════════════════════════════════════════════════════ -->
+<div id="screen-queue" class="screen queue-screen">
+  <div class="queue-top-bar">
+    <div class="queue-vibe-pill" id="queue-vibe-pill">🔥 Hype · 75% coverage</div>
+    <button class="btn-refresh-queue" id="btn-refresh-queue" aria-label="Refresh queue">↻</button>
+  </div>
+  <div class="queue-list" id="queue-list" aria-label="Song queue"></div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════════════
+     SCREEN 8: RECAP
+════════════════════════════════════════════════════════════════════ -->
+<div id="screen-recap" class="screen recap-screen">
+  <canvas id="confetti-canvas" aria-hidden="true"></canvas>
+
+  <div class="recap-header">
+    <div class="recap-title">Party Over! 🎉</div>
+    <div class="recap-subtitle">Here's how tonight went</div>
+  </div>
+
+  <div class="recap-stats">
+    <div class="stat-card">
+      <div class="stat-icon">🎵</div>
+      <div>
+        <div class="stat-value" id="recap-songs-played">0</div>
+        <div class="stat-label">songs played</div>
+      </div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-icon">⏱</div>
+      <div>
+        <div class="stat-value" id="recap-duration">0 min</div>
+        <div class="stat-label">of music</div>
+      </div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-icon">👑</div>
+      <div>
+        <div class="stat-value" id="recap-top-song" style="font-size:16px">—</div>
+        <div class="stat-label">highest crowd coverage</div>
+      </div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-icon">👥</div>
+      <div>
+        <div class="stat-value" id="recap-member-count">0 people</div>
+        <div class="stat-label">partied together</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Share card -->
+  <div class="share-card-wrap">
+    <canvas id="share-canvas" aria-label="Share card preview"></canvas>
+    <br />
+    <button class="btn-share-ig" id="btn-share-ig">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zM5.838 12a6.162 6.162 0 1112.324 0 6.162 6.162 0 01-12.324 0zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+      Save for Stories
+    </button>
+  </div>
+
+  <div class="recap-actions">
+    <button class="btn-primary" id="btn-new-party">Start New Party</button>
+    <button class="btn-secondary" id="btn-done">Done</button>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════════════
+     LYRICS PANEL (Bottom Sheet)
+════════════════════════════════════════════════════════════════════ -->
+<div id="lyrics-panel" class="lyrics-panel" role="dialog" aria-label="Lyrics" aria-modal="true">
+  <div class="lyrics-drag-handle" aria-hidden="true"></div>
+  <div class="lyrics-panel-header">
+    <div class="lyrics-panel-title" id="lyrics-panel-title">—</div>
+    <div class="lyrics-panel-artist" id="lyrics-panel-artist">—</div>
+  </div>
+  <div class="lyrics-scroll">
+    <div id="lyrics-lines" aria-live="polite" aria-label="Song lyrics"></div>
+  </div>
+  <div class="lyrics-panel-footer">
+    <div class="vocals-slider-row">
+      <span class="vocals-label">🎤 Artist Voice</span>
+      <input type="range" class="viblend-slider" id="lyrics-vocal-slider"
+             min="0" max="100" value="100" step="1" aria-label="Artist voice volume" />
+      <span class="vocals-label">🎵</span>
+    </div>
+  </div>
+  <button id="lyrics-close" style="position:absolute;top:16px;right:16px;background:none;border:none;color:var(--text-tertiary);font-size:20px;cursor:pointer;padding:8px" aria-label="Close lyrics">✕</button>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════════════
+     KARAOKE PANEL (Bottom Sheet)
+════════════════════════════════════════════════════════════════════ -->
+<div id="karaoke-panel" class="karaoke-panel" role="dialog" aria-label="Karaoke" aria-modal="true">
+  <div class="lyrics-drag-handle" aria-hidden="true"></div>
+  <div class="karaoke-header">
+    <div class="karaoke-title">🎤 Karaoke Room</div>
+    <span class="mic-count-badge" id="mic-count-badge">0</span>
+    <button id="karaoke-close" style="background:none;border:none;color:var(--text-tertiary);font-size:20px;cursor:pointer;padding:8px;margin-left:auto" aria-label="Close karaoke">✕</button>
+  </div>
+
+  <!-- HOST VIEW -->
+  <div id="karaoke-host-view">
+    <div class="karaoke-controls">
+      <div class="volume-row">
+        <span class="volume-row-label">All Mics</span>
+        <input type="range" class="viblend-slider" id="master-mic-volume" min="0" max="100" value="100" aria-label="Master mic volume" />
+      </div>
+      <div class="volume-row">
+        <span class="volume-row-label">Music</span>
+        <input type="range" class="viblend-slider" id="master-music-volume" min="0" max="100" value="75" aria-label="Music volume" />
+      </div>
+    </div>
+
+    <div class="karaoke-toggle-row">
+      <span style="font-size:14px;font-weight:600;color:var(--text-secondary)">Enable Karaoke for All</span>
+      <label class="toggle-switch" aria-label="Enable karaoke">
+        <input type="checkbox" id="karaoke-toggle" />
+        <span class="toggle-slider"></span>
+      </label>
+    </div>
+
+    <div class="section-label px-20" style="margin-bottom:8px">Members</div>
+    <div class="mic-member-list" id="mic-member-list"></div>
+  </div>
+
+  <!-- GUEST VIEW -->
+  <div id="karaoke-guest-view" class="guest-karaoke" style="display:none">
+    <div class="other-mics" id="other-mics"></div>
+
+    <button class="mic-button-big" id="mic-button-big" aria-label="Toggle microphone">
+      <svg width="40" height="40" viewBox="0 0 24 24" fill="currentColor">
+        <path d="M12 14c1.66 0 3-1.34 3-3V5c0-1.66-1.34-3-3-3S9 3.34 9 5v6c0 1.66 1.34 3 3 3zm5.3-3c0 3-2.54 5.1-5.3 5.1S6.7 14 6.7 11H5c0 3.41 2.72 6.23 6 6.72V21h2v-3.28c3.28-.49 6-3.31 6-6.72h-1.7z"/>
+      </svg>
+      <span class="mic-label">Tap to Sing</span>
+    </button>
+
+    <div class="vocals-slider-row" style="width:100%;padding:0 20px">
+      <span class="vocals-label">🔇</span>
+      <input type="range" class="viblend-slider" id="guest-mic-volume"
+             min="0" max="100" value="100" style="flex:1" aria-label="Your mic volume" />
+      <span class="vocals-label">🎤</span>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════════════
+     BOTTOM NAVIGATION BAR
+════════════════════════════════════════════════════════════════════ -->
+<nav id="nav-bar" class="nav-bar" role="navigation" aria-label="App navigation">
+  <button class="nav-item" id="nav-nowplaying" data-screen="nowplaying" aria-label="Now Playing">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M12 3v9.28a4 4 0 00-1-.28C8.79 12 7 13.79 7 16s1.79 4 4 4 4-1.79 4-4V7h4V3h-7z"/></svg>
+    Now Playing
+  </button>
+  <button class="nav-item" id="nav-queue" data-screen="queue" aria-label="Queue">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M15 6H3v2h12V6zm0 4H3v2h12v-2zM3 16h8v-2H3v2zM17 6v8.18c-.31-.11-.65-.18-1-.18-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3V8h3V6h-5z"/></svg>
+    Queue
+  </button>
+</nav>
+
+<!-- ═══════════════════════════════════════════════════════════════════
+     GLOBAL OVERLAYS
+════════════════════════════════════════════════════════════════════ -->
+<div id="toast-container" class="toast-container"></div>
+<div id="connection-banner" class="connection-banner" aria-live="assertive"></div>
+
+<!-- ═══════════════════════════════════════════════════════════════════
+     SCRIPTS
+════════════════════════════════════════════════════════════════════ -->
+<script>window.__VIBLEND_CONFIG = {};</script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<script type="module" src="/js/app.js"></script>
+
+</body>
+</html>
